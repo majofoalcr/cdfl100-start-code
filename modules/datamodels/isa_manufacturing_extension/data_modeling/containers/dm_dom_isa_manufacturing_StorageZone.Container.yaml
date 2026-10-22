@@ -1,0 +1,48 @@
+space: {{ schemaSpace }}
+externalId: StorageZone
+name: StorageZone
+description: A component of a batch manufacturing area used to hold materials, ingredients, or
+  products (e.g. liquid storage, dry storage) rather than to process them.
+properties:
+  storageZoneId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: storageZoneId
+  storageZoneName:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: storageZoneName
+  area:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: area
+indexes:
+  storageZoneIdIndex:
+    properties:
+    - storageZoneId
+    cursorable: true
+    indexType: btree
+  storageZoneNameIndex:
+    properties:
+    - storageZoneName
+    cursorable: true
+    indexType: btree
+  areaIndex:
+    properties:
+    - area
+    cursorable: true
+    indexType: btree

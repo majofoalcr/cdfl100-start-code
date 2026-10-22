@@ -1,0 +1,13 @@
+# nuremberg_site_manual.CogniteFile.yaml
+externalId: 'PID_ICF'
+space: 'oslo_sp'
+name: 'PID_ICF.pdf'
+description: 'Site manual for the Oslo Ice Cream Factory site.'
+mimeType: 'application/pdf'
+directory: 'files'
+tags:
+  - 'manual'
+  - 'oslo'
+assets:
+  - space: 'oslo_sp'
+    externalId: 'OSPRMOWR541'   # link the file to a CogniteAsset instance in the same space, e.g. the site or a specific line

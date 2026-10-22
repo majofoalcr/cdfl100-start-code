@@ -1,0 +1,75 @@
+environment:
+  name: prod
+  project: cdf-bootcamp-<n>-<env>
+  validation-type: prod
+  selected:
+  - modules/common
+
+variables:
+  modules:
+    # Shared across modules: same key name + value used by more than one module below.
+    datasetExternalId: ds_isa_manufacturing
+    data_pipeline_client_id: ${DATA_PIPELINE_CLIENT_ID}
+    data_pipeline_client_secret: ${DATA_PIPELINE_CLIENT_SECRET}
+    # Schema space where the selected data model views/containers are defined.
+    schemaSpace: dm_dom_isa_manufacturing
+
+    common:
+      cdf_project_foundation:
+        # Optional site segment for access-group names (e.g. "oslo"). Leave blank to omit.
+        site: oslo
+        # Dataset used to scope the foundation access group ACLs.
+        # Must match the dataset used by the source system modules.
+        dataset: [ds_isa_manufacturing]
+        # Computed by scripts/setup_project.py per environment as <persona>[-<site>]-<env>
+        # where env is "prod" (covers prod + test) or "prod". These defaults are the
+        # no-site prod values; setup_project.py overrides them in each config.<env>.yaml.
+        producerGroupName: producer_prod
+        adminGroupName: admin_prod
+        dataPipelineName: data_pipeline_prod
+        # Object ID of the Entra ID security group mapped to each persona (SOP Step 3d).
+        # Values are stored in .env by setup_project.py and referenced here via ${…}.
+        # Run the wizard to populate .env, or set the variables manually.
+        producerSourceId: ${PRODUCER_SOURCE_ID}  # read/write ingestion producers
+        adminSourceId: ${ADMIN_TK_SOURCE_ID}  # foundation administrators
+        data_pipeline_source_id: ${DATA_PIPELINE_SOURCE_ID}
+        # All DM spaces the producer group needs read access to: project-level space +
+        # one per installed extractor module + one per site (site data is written into
+        # its own space by the isa_manufacturing_extension transformations, see
+        # config_site_space.Table.csv). Computed by setup_project.py.
+        instanceSpaces: [inst_isa_manufacturing, oslo_sp, nuremberg_sp, marseille_sp, houston_sp, sao_paulo_sp, kuala_lumpur_sp, chicago_sp, rotterdam_sp, london_sp, hannover_sp]
+        # Supported: cdm | isa_manufacturing_extension | cfihos_oil_and_gas_extension
+        dataModelVariant: isa_manufacturing_extension
+        rawDatabase: ice-cream-factory-db
+
+    datamodels:
+      isa_manufacturing_extension:
+        # This configuration file defines variables used by the ISA-95/ISA-88 manufacturing data model module
+        # Enterprise schema space for ISA manufacturing views and containers (DOM tier)
+        # Aligns with schemaSpace in isa_manufacturing_extension_search
+        # Instance space for ISA manufacturing data instances (creates the space resource)
+        instance_space: inst_isa_manufacturing
+        # Enterprise data model external ID (DOM tier)
+        dataModelExternalId: ISA_Manufacturing_DOM
+        # Raw database name for ISA manufacturing source tables
+        rawDatabase: ice-cream-factory-db
+        # Enterprise view/data model version — used in all view and data model definitions
+        # Aligns with enterprise_dm_version in isa_manufacturing_extension_search
+        enterprise_dm_version: v1
+        # Version of the ISA manufacturing workflow
+        # Used in workflow definitions for versioning
+        workflowVersion: '1'
+
+      isa_manufacturing_extension_search:
+        # Versioning policy: bump `search_dm_version` here independently of the
+        # enterprise `enterprise_dm_version`. See `cdf-enterprise-vs-solution.md` §9.
+        # Enterprise module references (read-only from this solution's perspective)
+        enterprise_dm_version: v1 # Enterprise view version (used only for direct-relation source views in CDM/IDM)
+        # Search solution spaces
+        search_space: dm_sol_isa_manufacturing_search # Space for the search solution model and its views
+        # Search solution data model
+        search_dm_version: v1
+        search_data_model_external_id: ISA_Manufacturing_Search_SOL
+        search_data_model_name: ISA Manufacturing Domain Model Search
+        environment: prod
+        

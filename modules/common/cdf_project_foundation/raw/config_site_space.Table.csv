@@ -1,0 +1,11 @@
+key,site_name,site_space,site_prefix
+1,Oslo,oslo_sp,OS
+2,Nuremberg,nuremberg_sp,NU
+3,Marseille,marseille_sp,MA
+4,Houston,houston_sp,HO
+5,Sao Paulo,sao_paulo_sp,SAPA
+6,Kuala Lumpur,kuala_lumpur_sp,KULU
+7,Chicago,chicago_sp,CH
+8,Rotterdam,rotterdam_sp,RO
+9,London,london_sp,LO
+10,Hannover,hannover_sp,HA

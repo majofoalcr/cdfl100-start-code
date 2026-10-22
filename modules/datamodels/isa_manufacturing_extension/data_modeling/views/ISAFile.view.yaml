@@ -1,0 +1,31 @@
+space: {{ schemaSpace }}
+externalId: ISAFile
+name: ISA File
+description: Files linked to ISA assets
+implements:
+- space: cdf_cdm
+  externalId: CogniteFile
+  version: v1
+  type: view
+version: {{ enterprise_dm_version }}
+properties:
+  assets:
+    container:
+      space: cdf_cdm
+      externalId: CogniteFile
+      type: container
+    containerPropertyIdentifier: assets
+    name: Assets
+    description: >
+      Reverse relationship collection of all ISA Asset entities that are associated with this
+      file. The assets relationship enables navigation from file to asset hierarchy, supporting
+      asset-centric file queries and asset documentation management. This relationship follows
+      ISA-95 asset documentation standards and enables comprehensive asset documentation management,
+      supporting engineering, operations, and maintenance activities. Document organization should
+      follow ISA-95 document classification and naming conventions to ensure consistency and
+      interoperability. [ISA-95]
+    source:
+      space: {{ schemaSpace }}
+      externalId: ISAAsset
+      version: {{ enterprise_dm_version }}
+      type: view

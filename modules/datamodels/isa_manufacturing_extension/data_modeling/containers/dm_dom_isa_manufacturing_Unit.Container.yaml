@@ -1,0 +1,193 @@
+space: {{ schemaSpace }}
+externalId: Unit
+name: Unit
+description: A collection of associated control modules and/or equipment modules and other process
+  equipment in which one or more major processing activities can be conducted. Units are presumed to
+  operate on only one batch at a time. Units operate relatively independently of one another. This
+  term applies to both the physical equipment and the equipment entity. Examples of major processing
+  activities are react, crystallize, and make a solution.
+properties:
+  unitId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: unitId
+  unitName:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: unitName
+  unit_class:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: unit_class
+  capacity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: capacity
+  capacity_unit:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: capacity_unit
+  processCell:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: processCell
+  site:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: site
+  src:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: src
+  machine_type:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: machine_type
+  function:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: function
+  dimensions:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: dimensions
+  weight:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: weight
+  output:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: output
+  power:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: power
+  model:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: model
+  metadata:
+    type:
+      list: false
+      type: json
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: metadata
+indexes:
+  unitIdIndex:
+    properties:
+    - unitId
+    cursorable: true
+    indexType: btree
+  unitNameIndex:
+    properties:
+    - unitName
+    cursorable: true
+    indexType: btree
+  unitClassIndex:
+    properties:
+    - unit_class
+    cursorable: true
+    indexType: btree
+  processCellIndex:
+    properties:
+    - processCell
+    cursorable: true
+    indexType: btree
+  siteIndex:
+    properties:
+    - site
+    cursorable: true
+    indexType: btree
+  srcIndex:
+    properties:
+    - src
+    cursorable: true
+    indexType: btree
+  machineTypeIndex:
+    properties:
+    - machine_type
+    cursorable: true
+    indexType: btree
+  functionIndex:
+    properties:
+    - function
+    cursorable: true
+    indexType: btree
+
+

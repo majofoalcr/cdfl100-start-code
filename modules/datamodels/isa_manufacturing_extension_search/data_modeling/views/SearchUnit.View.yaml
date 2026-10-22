@@ -1,0 +1,134 @@
+space: "{{search_space}}"
+externalId: Unit
+name: Unit
+description: A collection of associated control modules and/or equipment modules and other process
+  equipment in which one or more major processing activities can be conducted. Units are presumed to
+  operate on only one batch at a time. Units operate relatively independently of one another. This
+  term applies to both the physical equipment and the equipment entity. Examples of major processing
+  activities are react, crystallize, and make a solution.
+version: "{{search_dm_version}}"
+properties:
+  unitId:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: unitId
+    name: Unit id
+    description: >
+      Unique identifier for the unit entity, conforming to ISA-88 Equipment Model standards.
+      A unit represents a basic equipment entity that can carry out one or more processing activities.
+      The unitId serves as the primary key and enables traceability of units throughout the
+      manufacturing lifecycle. This identifier should align with ISA-88 equipment classification
+      standards and support integration with control systems and engineering databases. [ISA-88]
+  unitName:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: unitName
+    name: Unit name
+    description: >
+      Human-readable name for the unit, typically describing its processing capability or function
+      (e.g., "Reactor Unit 1", "Distillation Column A", "Mixing Unit"). The unitName follows
+      ISA-88 naming conventions for units and should be descriptive enough for process engineers
+      and operators to understand the unit's function. This name is often used in control system
+      displays, batch recipes, and operational documentation. [ISA-88]
+  unit_class:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: unit_class
+    name: Unit class
+    description: >
+      Classification of the unit according to its functional class or processing capability,
+      following ISA-88 unit classifications. Common unit classes include reactor units, separation
+      units, mixing units, heating/cooling units, and transfer units. The unit_class enables
+      filtering and analysis by unit function, supports recipe design patterns, and facilitates
+      unit reuse across different processes. This classification should follow standardized unit
+      class taxonomies for consistency. [ISA-88]
+  capacity:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: capacity
+    name: Capacity
+    description: >
+      The maximum processing capacity or throughput of the unit, expressed as a numeric value.
+      The capacity represents the unit's design or rated capacity for processing materials, energy,
+      or products. This value is critical for production planning, batch sizing, resource
+      allocation, and capacity utilization analysis. The capacity should be interpreted in
+      conjunction with capacity_unit to determine the complete capacity specification. [ISA-88]
+  capacity_unit:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: capacity_unit
+    name: Capacity unit
+    description: >
+      The unit of measure for the capacity value, conforming to standard unit of measure
+      conventions (e.g., "kg", "L", "m³/h", "kW"). The capacity_unit provides the dimensional
+      context for the capacity numeric value, enabling proper capacity calculations and
+      conversions. This field should follow standardized unit naming conventions (e.g., ISO 80000,
+      SI units) to ensure consistency and interoperability across systems and organizations. [ISA-88]
+  processCell:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: processCell
+    name: Process cell
+    description: >
+      Reference to the parent ProcessCell entity that contains this unit, establishing the ISA-95
+      Level 4 hierarchical relationship. The processCell relationship enables navigation from
+      unit to process cell level and supports organizational queries across the manufacturing
+      hierarchy. This relationship follows ISA-95 parent-child location hierarchy principles,
+      ensuring proper containment relationships for functional locations within the process cell
+      boundary. [ISA-88, ISA-95 Level 4]
+    source:
+      space: "{{search_space}}"
+      externalId: ProcessCell
+      version: "{{search_dm_version}}"
+      type: view
+  productionLine:
+    container:
+      space: "{{schemaSpace}}"
+      externalId: Unit
+      type: container
+    containerPropertyIdentifier: productionLine
+    name: Production line
+    description: >
+      Reference to the parent ProductionLine entity that contains this unit, for units whose
+      immediate parent in the ISA-95 hierarchy is a production line rather than a process cell
+      (e.g. units under a filling, moulding, or extrusion line). This relationship enables
+      navigation from unit to production line level and supports organizational queries across
+      the manufacturing hierarchy. [ISA-95 Level 4]
+    source:
+      space: "{{search_space}}"
+      externalId: ProductionLine
+      version: "{{search_dm_version}}"
+      type: view
+  equipment_modules:
+    source:
+      space: "{{search_space}}"
+      externalId: EquipmentModule
+      version: "{{search_dm_version}}"
+      type: view
+    through:
+      source:
+        space: "{{search_space}}"
+        externalId: EquipmentModule
+        version: "{{search_dm_version}}"
+        type: view
+      identifier: unit
+    name: Equipment modules
+    description: >
+      Reverse relationship collection of all ISA Asset entities that are specifically associated
+      with this unit through the assetSpecific relationship. This enables the unit to be linked
+      to the broader asset hierarchy while maintaining ISA-88 unit relationships. Assets linked
+      through this relationship may include equipment, functional locations, or other asset types
+      that are operationally scoped to this unit. [ISA-88, ISA-95]
+    connectionType: multi_reverse_direct_relation

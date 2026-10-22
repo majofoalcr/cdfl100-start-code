@@ -1,0 +1,50 @@
+space: "{{search_space}}"
+externalId: "{{search_data_model_external_id}}"
+name: "{{search_data_model_name}}"
+description: >
+  Search-optimized solution data model for ISA Manufacturing domain. Maps to enterprise
+  containers in the isa_manufacturing_extension module without inheriting enterprise
+  views, so this model can evolve independently. Reverse direct relations live here
+  rather than on the enterprise model.
+version: "{{search_dm_version}}"
+views:
+- space: "{{search_space}}"
+  externalId: ISAAsset
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: Area
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: Enterprise
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: EquipmentModule
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: ProcessCell
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: Site
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: Unit
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: ISAFile
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: StorageZone
+  version: "{{search_dm_version}}"
+  type: view
+- space: "{{search_space}}"
+  externalId: ISATimeSeries
+  version: "{{search_dm_version}}"
+  type: view

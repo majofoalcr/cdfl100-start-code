@@ -1,0 +1,13 @@
+externalId: tr_timeseries_all_to_isa_assets
+name: Timeseries to ISAAsset contextualization
+destination:
+  dataModel:
+    space: cdf_cdm
+    externalId: CogniteCore
+    version: v1
+    destinationType: CogniteTimeSeries
+  type: instances
+dataSetExternalId: {{ datasetExternalId }}
+ignoreNullFields: true
+isPublic: true
+conflictMode: upsert

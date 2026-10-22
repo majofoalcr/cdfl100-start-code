@@ -1,0 +1,55 @@
+workflowExternalId: wf_all_isa_raw_to_isa_manufacturing
+version: {{ workflowVersion }}
+workflowDefinition:
+  description: 'Run ISA asset build, then overlays in parallel'
+  tasks:
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_isa_asset'
+          concurrencyPolicy: fail
+      name: 'Build ISA Asset Tree'
+      description: Create ISAAsset nodes and hierarchy from RAW
+      retries: 3
+      timeout: 3600
+      onFailure: 'abortWorkflow'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_enterprise'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_enterprise'
+          concurrencyPolicy: fail
+      name: 'Enterprise overlay'
+      description: Upsert Enterprise view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_site'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_site'
+          concurrencyPolicy: fail
+      name: 'Site overlay'
+      description: Upsert Site view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_area'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_area'
+          concurrencyPolicy: fail
+      name: 'Area overlay'
+      description: Upsert Area view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'

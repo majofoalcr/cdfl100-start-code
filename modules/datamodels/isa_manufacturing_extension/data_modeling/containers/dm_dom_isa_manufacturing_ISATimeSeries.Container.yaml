@@ -1,0 +1,12 @@
+space: dm_dom_isa_manufacturing
+externalId: dm_dom_isa_manufacturing_ISATimeSeries
+name: ISATimeSeries
+description: Extension properties for ISA time series, adding site context for multi-site deployments.
+usedFor: node
+properties:
+  site:
+    type:
+      type: text
+    nullable: true
+    name: site
+    description: Denormalized name of the site this time series belongs to, kept here for convenient filtering without traversing the asset hierarchy.

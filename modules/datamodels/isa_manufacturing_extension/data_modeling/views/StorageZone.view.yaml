@@ -1,0 +1,48 @@
+space: {{ schemaSpace }}
+externalId: StorageZone
+name: StorageZone
+description: A component of a batch manufacturing area used to hold materials, ingredients, or
+  products (e.g. liquid storage, dry storage) rather than to process them.
+version: {{ enterprise_dm_version }}
+properties:
+  storageZoneId:
+    container:
+      space: {{ schemaSpace }}
+      externalId: StorageZone
+      type: container
+    containerPropertyIdentifier: storageZoneId
+    name: Storage zone id
+    description: >
+      Unique identifier for the storage zone entity. A storage zone represents an area of a site
+      used to hold materials, ingredients, or products (e.g. liquid storage, dry storage) rather
+      than to process them. The storageZoneId serves as the primary key and ensures consistent
+      tracking across all manufacturing operations. [ISA-95 Level 4]
+  storageZoneName:
+    container:
+      space: {{ schemaSpace }}
+      externalId: StorageZone
+      type: container
+    containerPropertyIdentifier: storageZoneName
+    name: Storage zone name
+    description: >
+      Human-readable name for the storage zone, typically describing its storage function (e.g.,
+      "Liquid Storage", "Dry Storage"). This name should align with ISA-95 functional location
+      naming standards and be descriptive enough for operational personnel to identify the zone's
+      purpose within the area. [ISA-95 Level 4]
+  area:
+    container:
+      space: {{ schemaSpace }}
+      externalId: StorageZone
+      type: container
+    containerPropertyIdentifier: area
+    name: Area
+    description: >
+      Reference to the parent Area entity that contains this storage zone, establishing the
+      ISA-95 Level 4 hierarchical relationship. This relationship follows ISA-95 parent-child
+      location hierarchy principles, ensuring proper containment relationships for functional
+      locations within the physical area boundary. [ISA-95 Level 4]
+    source:
+      space: {{ schemaSpace }}
+      externalId: Area
+      version: {{ enterprise_dm_version }}
+      type: view

@@ -1,0 +1,19 @@
+externalId: loc_isa_manufacturing_search
+name: 'ISA Manufacturing Search Solution Model (SOL)'
+description: 'Location filter for the ISA Manufacturing Search solution data model.'
+dataModels:
+  - externalId: '{{ search_data_model_external_id }}'
+    space: {{ search_space }}
+    version: {{ search_dm_version }}
+instanceSpaces:
+  - oslo_sp
+  - nuremberg_sp
+  - marseille_sp
+  - houston_sp
+  - sao_paulo_sp
+  - kuala_lumpur_sp
+  - chicago_sp
+  - rotterdam_sp
+  - london_sp
+  - hannover_sp
+dataModelingType: DATA_MODELING_ONLY

@@ -1,0 +1,13 @@
+# nuremberg_site_manual.CogniteFile.yaml
+externalId: 'Nuremberg_MouldingLineA46_PID'
+space: 'nuremberg_sp'
+name: 'Nuremberg_MouldingLineA46_PID.pdf'
+description: 'Site manual for the Nuremberg Ice Cream Factory site.'
+mimeType: 'application/pdf'
+directory: 'files'
+tags:
+  - 'manual'
+  - 'nuremberg'
+assets:
+  - space: 'nuremberg_sp'
+    externalId: 'nuremberg_production_mould_A46'   # link the file to a CogniteAsset instance in the same space, e.g. the site or a specific line

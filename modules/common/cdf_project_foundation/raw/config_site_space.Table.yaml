@@ -1,0 +1,2 @@
+dbName: '{{ rawDatabase}}'
+tableName: config_site_space

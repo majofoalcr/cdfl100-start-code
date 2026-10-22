@@ -1,0 +1,17 @@
+space: {{ schemaSpace }}
+externalId: ISATimeSeries
+name: ISA Time Series
+description: Time series linked to ISA assets
+implements:
+- space: cdf_cdm
+  externalId: CogniteTimeSeries
+  version: v1
+  type: view
+version: {{ enterprise_dm_version }}
+properties:
+  site:
+    container:
+      space: dm_dom_isa_manufacturing
+      externalId: dm_dom_isa_manufacturing_ISATimeSeries
+      type: container
+    containerPropertyIdentifier: site

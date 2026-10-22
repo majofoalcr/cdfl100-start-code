@@ -1,0 +1,14 @@
+externalId: 'nuremberg_filling_line_a46_pid'
+space: 'nuremberg_sp'
+name: 'Nuremberg_FillingLineA46_PID.pdf'
+description: 'Preliminary P&ID (ISA-5.1) for the Filling Line A46 at the Nuremberg site, Ice Cream Factory data. For L100 practitioner training use only — not for construction.'
+mimeType: 'application/pdf'
+directory: 'engineering_diagrams'
+tags:
+  - 'p&id'
+  - 'engineering-diagram'
+  - 'nuremberg'
+  - 'filling-line'
+assets:
+  - space: 'nuremberg_sp'
+    externalId: 'nuremberg_production_fill_A46'

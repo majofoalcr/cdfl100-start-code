@@ -1,0 +1,184 @@
+space: {{ schemaSpace }}
+externalId: {{ dataModelExternalId }}
+name: ISA Manufacturing Data Model
+description: ISA-95 based manufacturing domain model, aggregating all ISA. This is the Enterprise Data Model (EDM) for the ISA Manufacturing domain, including all views and interfaces.
+version: {{ enterprise_dm_version }}
+views:
+# List of Cognite views used as Interfaces in DM
+
+- space: cdf_cdm
+  externalId: CogniteDescribable
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteSourceable
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteSourceSystem
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteSchedulable
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteVisualizable
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteAsset
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteAssetClass
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteAssetType
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteEquipment
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteEquipmentType
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteFile
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteFileCategory
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteActivity
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteTimeSeries
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteAnnotation
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteDiagramAnnotation
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteUnit
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite3DTransformation
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteCubeMap
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite3DObject
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite3DModel
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteCADModel
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite3DRevision
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CognitePointCloudModel
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite360ImageModel
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteCADRevision
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CognitePointCloudRevision
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite360ImageCollection
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CogniteCADNode
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: CognitePointCloudVolume
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite360Image
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite360ImageStation
+  version: v1
+  type: view
+- space: cdf_cdm
+  externalId: Cognite360ImageAnnotation
+  version: v1
+  type: view
+
+# List of Cognite views in extended DM
+
+- space: {{ schemaSpace }}
+  externalId: ISAAsset
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: Area
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: Enterprise
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: EquipmentModule
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: ProcessCell
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: StorageZone
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: Site
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: Unit
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: ISAFile
+  version: {{ enterprise_dm_version }}
+  type: view
+- space: {{ schemaSpace }}
+  externalId: ISATimeSeries
+  version: {{ enterprise_dm_version }}
+  type: view
+  
