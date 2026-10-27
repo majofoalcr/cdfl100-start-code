@@ -37,7 +37,7 @@ variables:
         # one per installed extractor module + one per site (site data is written into
         # its own space by the isa_manufacturing_extension transformations, see
         # config_site_space.Table.csv). Computed by setup_project.py.
-        instanceSpaces: [inst_isa_manufacturing, oslo_sp, nuremberg_sp, marseille_sp, houston_sp, sao_paulo_sp, kuala_lumpur_sp, chicago_sp, rotterdam_sp, london_sp, hannover_sp]
+        instanceSpaces: [oslo_sp, nuremberg_sp, marseille_sp, houston_sp, sao_paulo_sp, kuala_lumpur_sp, chicago_sp, rotterdam_sp, london_sp, hannover_sp]
         # Supported: cdm | isa_manufacturing_extension | cfihos_oil_and_gas_extension
         dataModelVariant: isa_manufacturing_extension
         rawDatabase: ice-cream-factory-db
