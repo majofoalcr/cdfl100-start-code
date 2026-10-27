@@ -1,25 +1,15 @@
 from datetime import datetime, timedelta, timezone
-from itertools import islice
 from timeit import default_timer
 
 from cognite.client import CogniteClient
 from cognite.client.data_classes import ExtractionPipelineRun
-from cognite.client.data_classes.data_modeling import NodeId, ViewId
-from cognite.client.data_classes.data_modeling.cdm.v1 import CogniteAsset, CogniteTimeSeries
-from cognite.client.data_classes.filters import Prefix, ContainsAny
+from cognite.client.data_classes.data_modeling import NodeId
+from cognite.client.data_classes.data_modeling.cdm.v1 import CogniteTimeSeries
 
 from ice_cream_factory_api import IceCreamFactoryAPI
 
 from cognite.client.config import global_config
 global_config.disable_pypi_version_check = True
-
-from itertools import islice
-
-
-def batcher(iterable, batch_size):
-    iterator = iter(iterable)
-    while batch := list(islice(iterator, batch_size)):
-        yield batch
 
 
 def get_site_space(site: str) -> str:
@@ -28,62 +18,26 @@ def get_site_space(site: str) -> str:
 
 
 def get_time_series_for_site(client: CogniteClient, site):
-    this_site = site.lower()
     site_space = get_site_space(site)
 
-    # ISAAsset implements CogniteAsset, so the generated CogniteAsset class can still be used
-    # to read/deserialize the node - only the instance space has changed (per-site now, rather
-    # than one shared icapi_dm_space).
-    sub_tree_root = client.data_modeling.instances.retrieve_nodes(
-        NodeId(site_space, this_site),
-        node_cls=CogniteAsset
-    )
-    print(f"  [checkpoint] root ISAAsset retrieved for {site}: {1 if sub_tree_root else 0} node (space={site_space}, externalId={this_site})")
-
-    if not sub_tree_root:
-        print(
-            f"----No ISAAssets in CDF for {site}!----\n"
-            f"    Run the 'Create Cognite Asset Hierarchy' transformation!"
-        )
-        return []
-
-    sub_tree_nodes = client.data_modeling.instances.list(
-        instance_type=CogniteAsset,
-        filter=Prefix(property=["cdf_cdm", "CogniteAsset/v1", "path"], value=sub_tree_root.path),
-        limit=None
-    )
-    print(f"  [checkpoint] ISAAsset subtree retrieved for {site}: {len(sub_tree_nodes)} assets")
-
-    if not sub_tree_nodes:
-        print(
-            f"----No ISATimeSeries in CDF for {site}!----\n"
-            f"    Run the 'Contextualize Timeseries and Assets' transformation!"
-        )
-        return []
-
-    value_list = [{"space": node.space, "externalId": node.external_id} for node in sub_tree_nodes]
-
     # ISATimeSeries implements CogniteTimeSeries, so its data lives in the same
-    # cdf_cdm:CogniteTimeSeries container. Search through the core cdf_cdm view (not the
+    # cdf_cdm:CogniteTimeSeries container. List through the core cdf_cdm view (not the
     # custom ISATimeSeries view) - this still returns ISATimeSeries nodes, and it's required
-    # for the generated CogniteTimeSeries class to deserialize the response correctly (the SDK
-    # looks for properties keyed under cdf_cdm:CogniteTimeSeries/v1 specifically).
-    time_series = [
-        client.data_modeling.instances.search(
-            view=ViewId("cdf_cdm", "CogniteTimeSeries", "v1"),
-            instance_type=CogniteTimeSeries,
-            filter=ContainsAny(property=["cdf_cdm", "CogniteTimeSeries/v1", "assets"], values=batch),
-            limit=None
-        )
-        for batch in batcher(value_list, 20)
-    ]
-
-    # Combine list of batch results into a single NodeList
-    time_series = [node for nodelist in time_series for node in nodelist]
-    print(f"  [checkpoint] ISATimeSeries matched to assets for {site}: {len(time_series)} time series (before name filter)")
+    # for the generated CogniteTimeSeries class to deserialize the response correctly.
+    # Each site's instances live in their own space, so the space is the site filter.
+    time_series = list(client.data_modeling.instances.list(
+        instance_type=CogniteTimeSeries,
+        space=site_space,
+        limit=None
+    ))
+    print(f"  [checkpoint] ISATimeSeries retrieved for {site} (space={site_space}): {len(time_series)} time series (before name filter)")
 
     if not time_series:
-        print("No ISATimeSeries in the ISA Manufacturing Data Model (cdf_cdm CogniteTimeSeries container)")
+        print(
+            f"----No ISATimeSeries in CDF for {site}!----\n"
+            f"    Check that the time series have been created in space {site_space}"
+        )
+        return []
 
     time_series = [
         item for item in time_series
