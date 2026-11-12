@@ -53,3 +53,50 @@ workflowDefinition:
       onFailure: 'skipTask'
       dependsOn:
         - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_process_cell'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_process_cell'
+          concurrencyPolicy: fail
+      name: 'ProcessCell overlay'
+      description: Upsert ProcessCell view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_production_line'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_production_line'
+          concurrencyPolicy: fail
+      name: 'ProductionLine overlay'
+      description: Upsert ProductionLine view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_storage_zone'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_storage_zone'
+          concurrencyPolicy: fail
+      name: 'StorageZone overlay'
+      description: Upsert StorageZone view fields
+      retries: 3
+      timeout: 3600
+      onFailure: 'skipTask'
+      dependsOn:
+        - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
+    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_unit'
+      type: 'transformation'
+      parameters:
+        transformation:
+          externalId: 'tr_isa_asset_all_to_unit'
+          concurrencyPolicy: fail
+
+
