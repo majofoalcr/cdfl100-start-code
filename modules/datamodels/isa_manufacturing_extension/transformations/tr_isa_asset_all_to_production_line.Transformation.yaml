@@ -1,0 +1,13 @@
+externalId: tr_isa_asset_all_to_production_line
+name: ProductionLine
+destination:
+  dataModel:
+    space: {{ schemaSpace }}
+    externalId: {{ dataModelExternalId }}
+    version: {{ enterprise_dm_version }}
+    destinationType: ProductionLine
+  type: instances
+dataSetExternalId: {{ datasetExternalId }}
+ignoreNullFields: true
+isPublic: true
+conflictMode: upsert
