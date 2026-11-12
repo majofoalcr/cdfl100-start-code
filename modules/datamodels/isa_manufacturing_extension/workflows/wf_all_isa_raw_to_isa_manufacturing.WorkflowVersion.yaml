@@ -92,11 +92,3 @@ workflowDefinition:
       onFailure: 'skipTask'
       dependsOn:
         - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_isatree'
-    - externalId: 'wf_all_isa_raw_to_isa_manufacturing_t_unit'
-      type: 'transformation'
-      parameters:
-        transformation:
-          externalId: 'tr_isa_asset_all_to_unit'
-          concurrencyPolicy: fail
-
-
